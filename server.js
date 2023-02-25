@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://pettycashmanager.app"],
+    origin: ["http://localhost:3000", "https://monumental-kulfi-a4839a.netlify.app"],
     credentials: true,
   })
 );
@@ -43,10 +43,11 @@ app.use(errorHandler);
 //Database connection
 const PORT = process.env.PORT || 5000;
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI,{ useNewUrlParser: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`server running on port${PORT}`);
+     
     });
   })
   .catch((error) => {

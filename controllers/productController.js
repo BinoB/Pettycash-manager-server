@@ -5,7 +5,7 @@ const cloudinary = require("cloudinary").v2;
 
 // Create Prouct
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, sku, category, quantity, price, description } = req.body;
+  const { name,category, quantity, price, description } = req.body;
 
   //   Validation
   if (!name || !category || !quantity || !price || !description) {
@@ -20,7 +20,7 @@ const createProduct = asyncHandler(async (req, res) => {
     let uploadedFile;
     try {
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-        folder: "Pinvent App",
+        folder: "Pettycash",
         resource_type: "image",
       });
     } catch (error) {
@@ -40,7 +40,6 @@ const createProduct = asyncHandler(async (req, res) => {
   const product = await Product.create({
     user: req.user.id,
     name,
-    sku,
     category,
     quantity,
     price,
@@ -115,7 +114,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     let uploadedFile;
     try {
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-        folder: "Pinvent App",
+        folder: "Pettycash",
         resource_type: "image",
       });
     } catch (error) {

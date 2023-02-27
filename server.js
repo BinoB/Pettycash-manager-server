@@ -12,6 +12,8 @@ const path = require("path");
 
 const app = express();
 
+mongoose.set('strictQuery', false);
+
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());

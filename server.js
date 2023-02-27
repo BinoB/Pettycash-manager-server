@@ -20,11 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+const cors = require("cors");
+
 app.use(cors({
-  origin: ["http://localhost:3000", "https://pettycash-manager.vercel.app"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"]
+  origin: "https://pettycash-manager.vercel.app",
+  credentials: true
 }));
+
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://pettycash-manager.vercel.app');

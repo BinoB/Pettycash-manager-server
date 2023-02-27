@@ -1,7 +1,7 @@
 const dotenv = require("dotenv").config();
-const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
@@ -10,58 +10,41 @@ const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 
-mongoose.set("strictQuery", true);
-
 const app = express();
-//middlewares
+
+// Middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
-
-
-app.use(cors({
-  origin: "https://pettycash-manager.vercel.app",
-  credentials: true
-}));
-
-
-app.get('/api/users/loggedin', (req, res) => {
-
-  
-  res.header('Access-Control-Allow-Origin', 'https://pettycash-manager.vercel.app');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.json({ loggedIn: true });
-});
-
-
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://pettycash-manager.vercel.app"],
+    credentials: true,
+  })
+);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-//Routes middleware
+// Routes Middleware
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/contactus", contactRoute);
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Home page");
+  res.send("Home Page");
 });
 
-//Error Middleware
+// Error Middleware
 app.use(errorHandler);
-
-//Database connection
+// Connect to DB and start server
 const PORT = process.env.PORT || 5000;
 mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
+  .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`server running on port${PORT}`);
+      console.log(`Server Running on port ${PORT}`);
     });
   })
-  .catch((error) => {
-    console.log(error);
-  });
+  .catch((err) => console.log(err));

@@ -36,12 +36,14 @@ app.use((req, res, next) => {
 
 app.use(cors({
   origin: ["http://localhost:3000", "https://dreamy-medovik-f8eafe.netlify.app"],
-  credentials: true
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://dreamy-medovik-f8eafe.netlify.app');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Origin', 'https://dreamy-medovik-f8eafe.netlify.app');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
 

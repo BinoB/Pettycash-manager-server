@@ -21,13 +21,13 @@ app.use(bodyParser.json());
 
 
 app.use(cors({
-  origin: ["http://localhost:3000", "https://dreamy-medovik-f8eafe.netlify.app"],
+  origin: ["http://localhost:3000", "https://pettycash-manager.vercel.app/"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://dreamy-medovik-f8eafe.netlify.app');
+  res.header('Access-Control-Allow-Origin', 'https://pettycash-manager.vercel.app/');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();

@@ -8,7 +8,7 @@ const productRoute = require("./routes/productRoute");
 const contactRoute = require("./routes/contactRoute");
 const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser");
-const path = require('path');
+const path = require("path");
 
 mongoose.set("strictQuery", true);
 
@@ -20,19 +20,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
   cors({
-/*     origin: ["http://localhost:3000", "https://monumental-kulfi-a4839a.netlify.app"],
- */    /* credentials: true, */
+    origin: [
+      "http://localhost:3000",
+      "https://dreamy-medovik-f8eafe.netlify.app",
+    ],
+    credentials: true,
   })
 );
 
-app.use((req,res,next)=>{
-  res.header("Access-Control-Allow-Origin","*")
-  next()
-})
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
-
-
-app.use("/uploads", express.static(path.join(__dirname,"uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Routes middleware
 app.use("/api/users", userRoute);
@@ -50,11 +51,10 @@ app.use(errorHandler);
 //Database connection
 const PORT = process.env.PORT || 5000;
 mongoose
-  .connect(process.env.MONGO_URI,{ useNewUrlParser: true })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`server running on port${PORT}`);
-     
     });
   })
   .catch((error) => {

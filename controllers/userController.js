@@ -101,7 +101,7 @@ const loginUser = asyncHandler(async (req, res) => {
   });
 }
   if (user && passwordIsCorrect) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { _id, name, email } = user;
     res.status(200).json({
       _id,
       name,
@@ -131,7 +131,7 @@ const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { _id, name, email} = user;
     res.status(200).json({
       _id,
       name,
@@ -247,14 +247,18 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   // Reset Email
   const message = `
-      <h2>Hello ${user.name}</h2>
-      <p>Please use the url below to reset your password</p>  
+
+    <h2>Dear ${user.name}</h2>
+
+
+    <p>We recently received a request to reset your password for your account.To reset your password, please click on the link below</p>
+ 
       <p>This reset link is valid for only 30minutes.</p>
 
       <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
 
       <p>Regards...</p>
-      <p>PettyCash Manager</p>
+      <p>PettyCash Manager Support Team</p>
     `;
   const subject = "Password Reset Request";
   const send_to = user.email;

@@ -242,7 +242,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }).save();
 
   // Construct Reset Url
-  const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+/*   const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+ */  const resetUrl = `https://pettycash-manager.vercel.app/resetpassword/${resetToken}`;
 
   // Reset Email
   const message = `

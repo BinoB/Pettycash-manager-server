@@ -24,6 +24,7 @@ app.use(
     origin: ["http://localhost:3000", "https://pettycash-manager.vercel.app"],
     credentials: true,
   })
+  //
 );
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
